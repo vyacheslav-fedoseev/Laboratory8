@@ -1,6 +1,7 @@
 package bsu.rfe.java.group7.lab8.Fedoseev.varA1.servlet;
 
 import bsu.rfe.java.group7.lab8.Fedoseev.varA1.entity.ChatMessage;
+import bsu.rfe.java.group7.lab8.Fedoseev.varA1.entity.ChatUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+
 
 @WebServlet(name = "MessageListServlet",urlPatterns = "/messages.do")
 public class MessageListServlet extends ChatServlet {
@@ -25,13 +28,19 @@ public class MessageListServlet extends ChatServlet {
         pw.println("<body>");
 
 
+        LinkedList<String> authors = new LinkedList<String>();
 // В обратном порядке записать в поток HTML-разметку для каждого сообщения
         for (int i=messages.size()-1; i>=0; i--) {
             ChatMessage aMessage = messages.get(i);
-            pw.println("<div><strong>" + aMessage.getAuthor().getName()
+
+            String nameOfAuthor = aMessage.getAuthor().getName();
+
+            if (aMessage.getMessage().equals("NEWUSERINTHECHAT")) {
+                pw.println("<div>Пользователь <strong>" + nameOfAuthor +"</strong> пришёл в чат" + "</div>");
+            }
+            else pw.println("<div><strong>" + nameOfAuthor
                     + "</strong>: " + aMessage.getMessage() + "</div>");
         }
-
         pw.println("</body></html>");
     }
 }

@@ -1,5 +1,6 @@
 package bsu.rfe.java.group7.lab8.Fedoseev.varA1.servlet;
 
+import bsu.rfe.java.group7.lab8.Fedoseev.varA1.entity.ChatMessage;
 import bsu.rfe.java.group7.lab8.Fedoseev.varA1.entity.ChatUser;
 
 import javax.servlet.ServletException;
@@ -148,6 +149,9 @@ public class LoginServlet extends ChatServlet {
             response.addCookie(sessionIdCookie);
 // Перейти к главному окну чата
             response.sendRedirect(response.encodeRedirectURL("/LaboratoryJava8_war_exploded/view.htm"));
+            // Добавить в список сообщений новое
+            messages.add(new ChatMessage("NEWUSERINTHECHAT", aUser,
+                    Calendar.getInstance().getTimeInMillis()));
 // Вернуть null, т.е. сообщений об ошибках нет
             return null;
         } else {
