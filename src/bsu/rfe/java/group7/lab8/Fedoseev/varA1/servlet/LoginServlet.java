@@ -150,8 +150,10 @@ public class LoginServlet extends ChatServlet {
 // Перейти к главному окну чата
             response.sendRedirect(response.encodeRedirectURL("/LaboratoryJava8_war_exploded/view.htm"));
             // Добавить в список сообщений новое
-            messages.add(new ChatMessage("NEWUSERINTHECHAT", aUser,
-                    Calendar.getInstance().getTimeInMillis()));
+            synchronized (messages) {
+                messages.add(new ChatMessage("NEWUSERINTHECHAT", aUser,
+                        Calendar.getInstance().getTimeInMillis()));
+            }
 // Вернуть null, т.е. сообщений об ошибках нет
             return null;
         } else {
