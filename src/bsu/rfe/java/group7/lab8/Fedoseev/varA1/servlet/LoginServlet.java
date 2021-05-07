@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 
-
+@WebServlet(name = "LoginServlet",urlPatterns = "/login.do")
 public class LoginServlet extends ChatServlet {
     private static final long serialVersionUID = 1L;
     // Длительность сессии, в секундах
